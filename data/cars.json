@@ -1,0 +1,12 @@
+{
+    "cars": [
+        {"id": "oka", "image": "res://assets/png/car_oka.png", "price": 500, "prestige": 1, "color": "b8c0c8", "kind": "boxy"},
+        {"id": "vaz2107", "image": "res://assets/png/car_lada.png", "price": 1250, "prestige": 3, "color": "d8d0b0", "kind": "boxy"},
+        {"id": "logan", "image": "res://assets/png/car_renault.png", "price": 2750, "prestige": 5, "color": "c8d8e0", "kind": "sedan"},
+        {"id": "camry", "image": "res://assets/png/car_toyota.png", "price": 5000, "prestige": 9, "color": "3a4a5a", "kind": "sedan"},
+        {"id": "bmw5", "image": "res://assets/png/car_bmw.png", "price": 8000, "prestige": 15, "color": "20262e", "kind": "sedan"},
+        {"id": "mercedes_s", "image": "res://assets/png/car_mersedes.png", "price": 11250, "prestige": 21, "color": "101418", "kind": "sedan"},
+        {"id": "porsche911", "image": "res://assets/png/car_porshe.png", "price": 15500, "prestige": 30, "color": "c0392b", "kind": "sport"},
+        {"id": "veyron", "image": "res://assets/png/car_buggati.png", "price": 21250, "prestige": 40, "color": "1b2a6b", "kind": "sport"}
+    ]
+}

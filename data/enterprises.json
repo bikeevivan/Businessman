@@ -1,0 +1,38 @@
+{
+    "raw": [
+        {"level": 1, "price": 400, "prod_min": 14, "prod_max": 15},
+        {"level": 2, "price": 640, "prod_min": 27, "prod_max": 30},
+        {"level": 3, "price": 1024, "prod_min": 41, "prod_max": 45},
+        {"level": 4, "price": 1638, "prod_min": 54, "prod_max": 60},
+        {"level": 5, "price": 2621, "prod_min": 68, "prod_max": 75},
+        {"level": 6, "price": 4194, "prod_min": 81, "prod_max": 90},
+        {"level": 7, "price": 6711, "prod_min": 95, "prod_max": 105},
+        {"level": 8, "price": 10737, "prod_min": 108, "prod_max": 120},
+        {"level": 9, "price": 17180, "prod_min": 122, "prod_max": 135},
+        {"level": 10, "price": 27488, "prod_min": 135, "prod_max": 150}
+    ],
+    "factory": [
+        {"level": 1, "price": 400, "prod_min": 14, "prod_max": 15},
+        {"level": 2, "price": 640, "prod_min": 27, "prod_max": 30},
+        {"level": 3, "price": 1024, "prod_min": 41, "prod_max": 45},
+        {"level": 4, "price": 1638, "prod_min": 54, "prod_max": 60},
+        {"level": 5, "price": 2621, "prod_min": 68, "prod_max": 75},
+        {"level": 6, "price": 4194, "prod_min": 81, "prod_max": 90},
+        {"level": 7, "price": 6711, "prod_min": 95, "prod_max": 105},
+        {"level": 8, "price": 10737, "prod_min": 108, "prod_max": 120},
+        {"level": 9, "price": 17180, "prod_min": 122, "prod_max": 135},
+        {"level": 10, "price": 27488, "prod_min": 135, "prod_max": 150}
+    ],
+    "sales": [
+        {"level": 1, "price": 400, "prod_min": 14, "prod_max": 15},
+        {"level": 2, "price": 640, "prod_min": 27, "prod_max": 30},
+        {"level": 3, "price": 1024, "prod_min": 41, "prod_max": 45},
+        {"level": 4, "price": 1638, "prod_min": 54, "prod_max": 60},
+        {"level": 5, "price": 2621, "prod_min": 68, "prod_max": 75},
+        {"level": 6, "price": 4194, "prod_min": 81, "prod_max": 90},
+        {"level": 7, "price": 6711, "prod_min": 95, "prod_max": 105},
+        {"level": 8, "price": 10737, "prod_min": 108, "prod_max": 120},
+        {"level": 9, "price": 17180, "prod_min": 122, "prod_max": 135},
+        {"level": 10, "price": 27488, "prod_min": 135, "prod_max": 150}
+    ]
+}

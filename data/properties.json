@@ -1,0 +1,11 @@
+{
+    "properties": [
+        {"id": "shed", "price": 800, "prestige": 1, "color": "8a6b4f", "kind": "shed", "image": "res://assets/png/home_shed.png"},
+        {"id": "village_house", "price": 2200, "prestige": 3, "color": "a8865f", "kind": "house", "image": "res://assets/png/home_house.png"},
+        {"id": "town_flat", "price": 5500, "prestige": 7, "color": "7f8a99", "kind": "flat", "image": "res://assets/png/home_flat.png"},
+        {"id": "cottage", "price": 12000, "prestige": 13, "color": "b08968", "kind": "cottage", "image": "res://assets/png/home_cottage.png"},
+        {"id": "penthouse", "price": 25000, "prestige": 21, "color": "556273", "kind": "penthouse", "image": "res://assets/png/home_penthouse.png"},
+        {"id": "mansion", "price": 48000, "prestige": 33, "color": "6d5a4f", "kind": "mansion", "image": "res://assets/png/home_mansion.png"},
+        {"id": "palace", "price": 85000, "prestige": 50, "color": "e8e2d0", "kind": "palace", "image": "res://assets/png/home_palace.png"}
+    ]
+}

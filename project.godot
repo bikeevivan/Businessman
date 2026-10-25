@@ -1,0 +1,51 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
+[application]
+
+config/name="Бизнесмен"
+config/icon="res://assets/icon.png"
+run/main_scene="res://scenes/main_menu.tscn"
+config/features=PackedStringArray("4.7", "GL Compatibility")
+
+[autoload]
+
+I18n="*res://scripts/autoload/i18n.gd"
+Version="*res://scripts/autoload/version.gd"
+Settings="*res://scripts/autoload/settings.gd"
+Music="*res://scripts/autoload/music.gd"
+GameState="*res://scripts/autoload/game_state.gd"
+Market="*res://scripts/autoload/market.gd"
+TurnManager="*res://scripts/autoload/turn_manager.gd"
+AIManager="*res://scripts/autoload/ai_manager.gd"
+RandomEvents="*res://scripts/autoload/random_events.gd"
+SaveManager="*res://scripts/autoload/save_manager.gd"
+SteamAchievements="*res://scripts/autoload/steam_achievements.gd"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/resizable=false
+window/size/mode=0
+
+[gui]
+
+theme/custom="res://assets/game_theme.tres"
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.05, 0.07, 0.11, 1)
