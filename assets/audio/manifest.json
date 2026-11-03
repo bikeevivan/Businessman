@@ -3,20 +3,23 @@
     {
       "slug": "tycoon_theme",
       "purpose": "Main menu and gameplay background music for the business tycoon sandbox game",
-      "description": "Neutral instrumental corporate underscore: muted strings, warm Rhodes piano, very light percussion. 85 BPM. Restrained, professional, unobtrusive background for business tycoon UI. Seamlessly looped via crossfade.",
-      "duration_seconds": 134.99,
+      "file": "res://assets/audio/tycoon_theme.mp3",
+      "source": "audio_minimax_music3_00004 (ComfyUI, MiniMax Music 3)",
+      "seed": 638916024611356,
+      "prompt": "Lo-fi classical fusion, modern financial broker game soundtrack, smooth piano melodies, subtle cello undercurrents, light pizzicato strings, slow steady downbeat, sophisticated, professional, calm focus, premium background music, loopable, no vocals, no songs, no lyrics",
+      "lyrics": "-",
+      "style": "lo-fi classical fusion / financial broker game soundtrack",
+      "duration_seconds": 23.94,
       "format": "mp3",
       "bitrate_kbps": 192,
       "sample_rate_hz": 44100,
       "channels": 2,
-      "bpm": 85,
+      "bpm": null,
       "vocal": false,
       "loopable": true,
-      "prompt": "Instrumental corporate underscore, no vocals. Muted strings, warm Rhodes piano, very light percussion. 85 BPM. Neutral, restrained, professional background for business tycoon game UI. No hooks, no chiptune, no ethnic timbres, no epic crescendos. Controlled dynamics.",
-      "file": "res://assets/audio/tycoon_theme.mp3",
-      "seed": 11111,
-      "max_duration_requested": 240,
-      "note": "Prepared for seamless looping: original fade-in (0.25 s) and fade-out (~4.8 s) removed, last 2.5 s crossfaded with first 2.5 s, RMS level matched to original, peak 0.95. The game loops it by replaying on the AudioStreamPlayer.finished signal at -9 dB."
+      "loop_processing": "Playback with a 2.5 s pause between repeats, implemented in music.gd via AudioStreamPlayer.finished -> one-shot Timer -> _play(). The track has natural fade-in (0..1.75 s) and fade-out (21..23.94 s), so the restart joint is not abrupt. File level reduced by 3 dB (peak 0.622, RMS 0.068); the game plays it at -9 dB.",
+      "peak": 0.622,
+      "volume_db": -9.0
     }
   ]
 }

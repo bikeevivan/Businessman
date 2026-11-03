@@ -41,7 +41,7 @@ func _ready() -> void:
 	_refresh_all()
 
 func _build_ui() -> void:
-	UIBackground.add(self, "menu", Color(0.03, 0.05, 0.09, 0.28))
+	UIBackground.add(self, "menu", Color(0.03, 0.05, 0.09, 0.65))
 
 	var board = PanelContainer.new()
 	board.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)

@@ -1,5 +1,5 @@
 ﻿#define MyAppName "Бизнесмен"
-#define MyAppVersion "0.8"
+#define MyAppVersion "0.10"
 #define MyAppPublisher "Businessman"
 #define MyAppExeName "Businessman.exe"
 

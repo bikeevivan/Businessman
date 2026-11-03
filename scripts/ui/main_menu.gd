@@ -36,7 +36,7 @@ func _clear() -> void:
 
 func _make_page() -> VBoxContainer:
 	_clear()
-	UIBackground.add(self, "menu", Color(0.03, 0.05, 0.09, 0.28))
+	UIBackground.add(self, "menu", Color(0.04, 0.06, 0.10, 0.28))
 
 	var center = CenterContainer.new()
 	center.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -96,14 +96,24 @@ func _add_version_label() -> void:
 	var lbl = Label.new()
 	lbl.text = tr("m_version") % Version.get_version()
 	lbl.add_theme_font_size_override("font_size", 14)
-	lbl.add_theme_color_override("font_color", Color(0.6, 0.66, 0.78, 0.85))
+	lbl.add_theme_color_override("font_color", Color(0.85, 0.92, 1.0, 1.0))
+	lbl.add_theme_constant_override("outline_size", 3)
+	lbl.add_theme_color_override("font_outline_color", Color(0.02, 0.04, 0.08, 0.92))
+	var bg = StyleBoxFlat.new()
+	bg.bg_color = Color(0.03, 0.05, 0.09, 0.82)
+	bg.set_corner_radius_all(4)
+	bg.content_margin_left = 5.0
+	bg.content_margin_top = 4.0
+	bg.content_margin_right = 5.0
+	bg.content_margin_bottom = 4.0
+	lbl.add_theme_stylebox_override("normal", bg)
 	lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	lbl.vertical_alignment = VERTICAL_ALIGNMENT_BOTTOM
 	lbl.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT)
-	lbl.offset_left = -220.0
-	lbl.offset_top = -40.0
-	lbl.offset_right = -18.0
-	lbl.offset_bottom = -12.0
+	lbl.offset_left = -224.0
+	lbl.offset_top = -42.0
+	lbl.offset_right = -14.0
+	lbl.offset_bottom = -10.0
 	lbl.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(lbl)
 
