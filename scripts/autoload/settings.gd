@@ -52,6 +52,10 @@ func apply() -> void:
 	if music != null:
 		music.set_enabled(music_enabled)
 	var win = get_window()
+	if win != null:
+		win.title = "Бизнесмен"
+	if OS.get_name() == "Web":
+		return
 	if win == null:
 		return
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
@@ -59,5 +63,3 @@ func apply() -> void:
 	DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_MAXIMIZE_DISABLED, true)
 	win.size = Vector2i(1280, 720)
 	win.position = (DisplayServer.screen_get_size() - win.size) / 2
-	if win.has_method("set_window_title"):
-		win.title = "Бизнесмен"

@@ -1,5 +1,5 @@
-#define MyAppName "Бизнесмен"
-#define MyAppVersion "0.6"
+﻿#define MyAppName "Бизнесмен"
+#define MyAppVersion "0.8"
 #define MyAppPublisher "Businessman"
 #define MyAppExeName "Businessman.exe"
 
@@ -14,7 +14,7 @@ DefaultGroupName={#MyAppName}
 PrivilegesRequired=lowest
 PrivilegesRequiredOverridesAllowed=dialog
 DisableProgramGroupPage=yes
-OutputDir=E:\Games\TestGame\dist
+OutputDir=dist
 OutputBaseFilename=Businessman-Setup-{#MyAppVersion}
 Compression=lzma2
 SolidCompression=yes
@@ -25,6 +25,7 @@ UninstallDisplayIcon={app}\{#MyAppExeName}
 SetupIconFile=installer\icon.ico
 SetupLogging=yes
 WizardImageFile=installer\wizard.bmp
+WizardSmallImageFile=installer\wizard_small.bmp
 WizardImageStretch=no
 
 [Languages]

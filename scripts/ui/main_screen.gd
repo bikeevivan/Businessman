@@ -41,7 +41,7 @@ func _ready() -> void:
 	_refresh_all()
 
 func _build_ui() -> void:
-	UIBackground.add(self, "menu")
+	UIBackground.add(self, "menu", Color(0.03, 0.05, 0.09, 0.28))
 
 	var board = PanelContainer.new()
 	board.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -641,7 +641,7 @@ func _rebuild_slot_box() -> void:
 		if not info.is_empty() and bool(info.get("realistic_ai", false)):
 			row.add_child(_make_mode_badge())
 
-		if not info.is_empty():
+		if SaveManager.has_save_file(slot):
 			var del_btn = Button.new()
 			del_btn.text = tr("g_delete_btn")
 			del_btn.custom_minimum_size = Vector2(130, 46)
@@ -661,8 +661,8 @@ func _on_delete_confirmed() -> void:
 	_pending_delete_slot = -1
 	if slot < 1:
 		return
-	SaveManager.delete_save(slot)
-	_rebuild_slot_box()
+	if SaveManager.delete_save(slot):
+		_rebuild_slot_box()
 
 func _on_slot_chosen(slot: int) -> void:
 	GameState.current_save_slot = slot

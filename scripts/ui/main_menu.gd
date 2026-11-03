@@ -9,6 +9,7 @@ var _win_amount_error: Label
 var _realistic_ai_check: CheckButton
 var delete_confirm: ConfirmationDialog
 var _pending_delete_slot: int = -1
+var donate_dialog: AcceptDialog
 
 func _ready() -> void:
 	delete_confirm = ConfirmationDialog.new()
@@ -17,24 +18,25 @@ func _ready() -> void:
 	delete_confirm.cancel_button_text = tr("m_no")
 	delete_confirm.confirmed.connect(_on_delete_confirmed)
 	add_child(delete_confirm)
-	var lbl: Label = delete_confirm.get_label()
-	if lbl != null:
-		lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-		lbl.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		lbl.add_theme_font_size_override("font_size", 19)
-		lbl.custom_minimum_size = Vector2(420, 60)
+	_style_dialog(delete_confirm)
+
+	donate_dialog = AcceptDialog.new()
+	donate_dialog.title = tr("m_donate")
+	donate_dialog.ok_button_text = tr("m_ok")
+	add_child(donate_dialog)
+	_style_dialog(donate_dialog)
+
 	show_main_menu()
 
 func _clear() -> void:
 	for child in get_children():
-		if child == delete_confirm:
+		if child == delete_confirm or child == donate_dialog:
 			continue
 		child.queue_free()
 
 func _make_page() -> VBoxContainer:
 	_clear()
-	UIBackground.add(self, "menu")
+	UIBackground.add(self, "menu", Color(0.03, 0.05, 0.09, 0.28))
 
 	var center = CenterContainer.new()
 	center.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -109,6 +111,16 @@ func _add_spacer(parent: Node, height: int) -> void:
 	var spacer = Control.new()
 	spacer.custom_minimum_size = Vector2(0, height)
 	parent.add_child(spacer)
+
+func _style_dialog(dialog: AcceptDialog) -> void:
+	dialog.min_size = Vector2i(460, 0)
+	var lbl: Label = dialog.get_label()
+	if lbl != null:
+		lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		lbl.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		lbl.add_theme_font_size_override("font_size", 19)
+		lbl.custom_minimum_size = Vector2(420, 60)
 
 func _make_mode_badge() -> Label:
 	var badge = Label.new()
@@ -308,7 +320,7 @@ func show_load() -> void:
 		load_btn.pressed.connect(_load_game.bind(slot))
 		row.add_child(load_btn)
 
-		if not info.is_empty():
+		if SaveManager.has_save_file(slot):
 			var del_btn = Button.new()
 			del_btn.text = tr("m_delete_btn")
 			del_btn.custom_minimum_size = Vector2(140, 48)
@@ -329,8 +341,8 @@ func _on_delete_confirmed() -> void:
 	_pending_delete_slot = -1
 	if slot < 1:
 		return
-	SaveManager.delete_save(slot)
-	show_load()
+	if SaveManager.delete_save(slot):
+		show_load()
 
 func _load_game(slot: int) -> void:
 	if SaveManager.load_game(slot):
@@ -405,4 +417,12 @@ func _on_exit() -> void:
 	get_tree().quit()
 
 func _on_donate() -> void:
-	OS.shell_open("https://yoomoney.ru/to/000000000000000000")
+	var url: String = GameState.ITCH_PROJECT_URL.strip_edges()
+	if url.is_empty():
+		donate_dialog.dialog_text = tr("m_donate_not_configured")
+		donate_dialog.popup_centered()
+		return
+	var err: int = OS.shell_open(url)
+	if err != OK:
+		donate_dialog.dialog_text = tr("m_donate_failed") % url
+		donate_dialog.popup_centered()

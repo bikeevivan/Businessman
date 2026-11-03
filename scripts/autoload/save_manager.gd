@@ -4,6 +4,9 @@ const MAX_SLOTS: int = 5
 
 var save_dir: String = "user://"
 
+func _is_web() -> bool:
+	return OS.get_name() == "Web"
+
 func set_save_dir(dir: String) -> void:
 	save_dir = dir
 	if not save_dir.ends_with("/"):
@@ -14,6 +17,37 @@ func set_save_dir(dir: String) -> void:
 func _slot_path(slot: int) -> String:
 	return save_dir + "save_%d.json" % slot
 
+func _is_deleted_marker(data) -> bool:
+	return data != null and typeof(data) == TYPE_DICTIONARY and data.has("deleted") and bool(data["deleted"]) == true
+
+func _read_deleted(path: String) -> bool:
+	if not FileAccess.file_exists(path):
+		return false
+	var file = FileAccess.open(path, FileAccess.READ)
+	if file == null:
+		return false
+	var text: String = file.get_as_text().strip_edges()
+	file.close()
+	if text.is_empty():
+		return false
+	var data = JSON.parse_string(text)
+	return _is_deleted_marker(data)
+
+func _slot_is_valid(path: String) -> bool:
+	if not FileAccess.file_exists(path):
+		return false
+	var file = FileAccess.open(path, FileAccess.READ)
+	if file == null:
+		return false
+	var text: String = file.get_as_text().strip_edges()
+	file.close()
+	if text.is_empty():
+		return false
+	var data = JSON.parse_string(text)
+	if _is_deleted_marker(data):
+		return false
+	return data != null and typeof(data) == TYPE_DICTIONARY
+
 func get_available_slot() -> int:
 	for i in range(1, MAX_SLOTS + 1):
 		if not has_save(i):
@@ -21,7 +55,13 @@ func get_available_slot() -> int:
 	return 1
 
 func has_save(slot: int) -> bool:
-	return FileAccess.file_exists(_slot_path(slot))
+	return _slot_is_valid(_slot_path(slot))
+
+func has_save_file(slot: int) -> bool:
+	var path: String = _slot_path(slot)
+	if not FileAccess.file_exists(path):
+		return false
+	return not _read_deleted(path)
 
 func save_game(slot: int = -1) -> bool:
 	if slot < 1:
@@ -146,7 +186,22 @@ func get_save_info(slot: int) -> Dictionary:
 		"timestamp": int(data.get("timestamp", 0)),
 	}
 
-func delete_save(slot: int) -> void:
+func delete_save(slot: int) -> bool:
 	var path: String = _slot_path(slot)
-	if FileAccess.file_exists(path):
-		DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
+	if not FileAccess.file_exists(path):
+		return true
+	if _is_web():
+		var file = FileAccess.open(path, FileAccess.WRITE)
+		if file == null:
+			push_warning("Failed to mark save slot %d as deleted on Web (path: %s)" % [slot, path])
+			return false
+		file.store_string(JSON.stringify({"deleted": true}))
+		file.close()
+		return true
+	else:
+		var global_path: String = ProjectSettings.globalize_path(path)
+		var err: int = DirAccess.remove_absolute(global_path)
+		if err != OK:
+			push_warning("Failed to delete save file: %s (error %d)" % [global_path, err])
+			return false
+		return true

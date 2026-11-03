@@ -18,6 +18,9 @@ const DEFAULT_WIN_AMOUNT: float = 1000000.0
 const MIN_WIN_AMOUNT: float = 50000.0
 const MAX_WIN_AMOUNT: float = 1000000.0
 const TRAM_FARE: float = 30.0
+# Адрес страницы проекта на itch.io.
+# Формат: https://<user>.itch.io/<game>. При смене страницы проекта обновите эту константу.
+const ITCH_PROJECT_URL: String = "https://bikeevivan.itch.io/businessman"
 
 const AI_COLORS: Array = [
 	Color(0.95, 0.35, 0.35),

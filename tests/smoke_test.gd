@@ -19,6 +19,7 @@ func _ready() -> void:
 	_test_properties()
 	_test_random_events()
 	_test_save_load()
+	_test_save_delete()
 
 	if failures.is_empty():
 		print("SMOKE TEST: ALL PASSED")
@@ -484,3 +485,33 @@ func _test_save_load() -> void:
 
 	SaveManager.delete_save(5)
 	check(not SaveManager.has_save(5), "slot 5 deleted")
+
+func _test_save_delete() -> void:
+	SaveManager.set_save_dir("user://smoke_test_saves")
+
+	var slot: int = 2
+	SaveManager.delete_save(slot)
+	GameState.reset_for_new_game(1)
+	Market.reset()
+
+	check(SaveManager.save_game(slot), "save_game slot %d succeeds" % slot)
+	check(SaveManager.has_save(slot), "slot %d occupied" % slot)
+	check(SaveManager.has_save_file(slot), "slot %d file exists" % slot)
+	check(SaveManager.delete_save(slot), "delete_save returns true")
+	check(not SaveManager.has_save(slot), "has_save false after delete")
+	check(not SaveManager.has_save_file(slot), "has_save_file false after delete")
+	check(SaveManager.get_available_slot() == slot, "get_available_slot returns freed slot %d" % slot)
+
+	var invalid_slot: int = 3
+	SaveManager.delete_save(invalid_slot)
+	var path: String = SaveManager.save_dir + "save_%d.json" % invalid_slot
+	var file = FileAccess.open(path, FileAccess.WRITE)
+	check(file != null, "opened slot %d for writing invalid json" % invalid_slot)
+	if file != null:
+		file.store_string("not json{")
+		file.close()
+
+	check(not SaveManager.has_save(invalid_slot), "has_save false for invalid json")
+	check(SaveManager.has_save_file(invalid_slot), "has_save_file true for invalid json file")
+	check(SaveManager.delete_save(invalid_slot), "delete_save invalid json returns true")
+	check(not SaveManager.has_save_file(invalid_slot), "has_save_file false after deleting invalid json")
