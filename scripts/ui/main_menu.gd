@@ -6,7 +6,7 @@ var _lang_option: OptionButton
 var _music_check: CheckBox
 var _win_amount_edit: LineEdit
 var _win_amount_error: Label
-var _realistic_ai_check: CheckButton
+var _realistic_ai_check: CheckBox
 var delete_confirm: ConfirmationDialog
 var _pending_delete_slot: int = -1
 var donate_dialog: AcceptDialog
@@ -204,7 +204,7 @@ func show_new_game() -> void:
 
 	_add_spacer(page, 18)
 
-	_realistic_ai_check = CheckButton.new()
+	_realistic_ai_check = CheckBox.new()
 	_realistic_ai_check.text = tr("m_realistic_ai")
 	_realistic_ai_check.button_pressed = GameState.realistic_ai
 	_realistic_ai_check.add_theme_font_size_override("font_size", 20)
