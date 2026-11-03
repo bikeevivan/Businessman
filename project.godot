@@ -44,6 +44,7 @@ window/stretch/aspect="keep"
 
 [gui]
 
+custom_font="res://assets/fonts/ui_font.tres"
 theme/custom="res://assets/game_theme.tres"
 
 [rendering]
